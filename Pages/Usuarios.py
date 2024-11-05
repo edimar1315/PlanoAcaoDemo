@@ -1,5 +1,5 @@
 import streamlit as st
-from Config import connect_to_db, connection_string
+from config import connect_to_db, connection_string
 import pandas as pd
 import pyodbc
 

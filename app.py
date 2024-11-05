@@ -35,12 +35,12 @@ def validar_login(email, senha):
     cursor = conn.cursor()
     query = "SELECT Senha_hash FROM Usuarios WHERE Email = ? AND Senha_hash = ?"
     cursor.execute(query, (email, senha))
-    usuario = cursor.fetchone()
+    usuarios = cursor.fetchone()
     cursor.close()
     conn.close()
 
-    if usuario:
-        senha_hash_armazenada = usuario[0]
+    if usuarios:
+        senha_hash_armazenada = usuarios[0]
         if senha_hash_armazenada == hash_senha(senha):
             # Atualiza o último login
             conn = connect_to_db()
@@ -80,7 +80,7 @@ def login():
         if validar_login(email, senha):
             st.success("Login realizado com sucesso!")
             iniciar_sessao(email)
-            st.experimental_rerun()  # Recarrega a página após o login
+            st.rerun()  # Recarrega a página após o login
         else:
             st.error("Credenciais inválidas. Tente novamente.")
 
@@ -187,13 +187,13 @@ def render_conteudo(opcao):
     if opcao == "Atas":
         st.title("Atas")
         st.write("Conteúdo da tela Atas.")
-    elif opcao == "clientes":
+    elif opcao == "Clientes":
         st.title("Clientes")
         st.write("Conteúdo da tela Clientes.")
     elif opcao == "gerenciamento":
         st.title("Gerenciamento de Planos de Ação")
         st.write("Conteúdo da tela Gerenciamento.")
-    elif opcao == "Kanban Cliente":
+    elif opcao == "Kanban Clientes":
         st.title("Kanban Cliente")
         st.write("Conteúdo da tela Kanban Cliente.")
     elif opcao == "Kanban Status":
@@ -208,8 +208,7 @@ def render_conteudo(opcao):
     elif opcao == "Usuários":
         st.title("Usuários")
         listar_usuarios()
-    elif opcao == "Home":
-        st.title("Home")
+
 
 
 # Função principal
@@ -222,7 +221,7 @@ def main():
         if st.sidebar.button("Sair"):
             encerrar_sessao()
             st.sidebar.info("Sessão encerrada.")
-            st.experimental_rerun()
+            st.rerun()
 
         opcao = st.sidebar.radio("Escolha uma tela",
                                  ["Atas", "Clientes", "Gerenciamento", "Kanban Cliente", "Kanban Status",

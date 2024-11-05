@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from Config import connect_to_db
+from config import connect_to_db
 from sqlalchemy import text
 
 st.set_page_config(layout="wide")
