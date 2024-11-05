@@ -4,6 +4,7 @@ import pandas as pd
 import pyodbc
 import hashlib
 from datetime import datetime
+import sqlalchemy as sa
 
 # Configurações de layout
 st.set_page_config(layout="wide")
